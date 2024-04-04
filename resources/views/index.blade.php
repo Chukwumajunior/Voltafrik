@@ -71,9 +71,6 @@
           @endforeach
         </div>
       </div>
-      {{-- <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
-        <img src="assets/img/home.webp" class="img-fluid animated" alt="">
-      </div> --}}
     </div>
   </div>
 
@@ -656,25 +653,27 @@
     </div>
   </section><!-- End Frequently Asked Questions Section -->
 
-  <div class="row pt-4">
-    <h4 style="text-align: center; color: tomato">Advertisement</h4>
-    @foreach ($posts as $post)
-        @if($post->type == "advert")
-          <div class="col-md-3 p-4"> <!-- Adjust column size based on your layout preference -->
-            <a href="{{$post->body}}"><div class="advertisement card p-2">
-               <p>{{$post->title}}</p>
-                  <div class="card-body">   
-                      @if(!empty(trim($post->image)))
-                          <div>
-                              <img width="auto" height="150px" src="{{ asset("uploads/". $post->image) }}" class="card-img-top" alt="Product Image">
-                          </div>
-                      @endif
-                  </div>
-              </div></a>
-          </div>
-        @endif
-    @endforeach
-</div>
+  <div class="container pt-4">
+    <div class="row">
+      <h4 style="text-align: center; color: tomato">Advertisement</h4>
+      @foreach ($posts as $post)
+          @if($post->type == "advert")
+            <div class="col-md-3"> <!-- Adjust column size based on your layout preference -->
+              <a href="{{$post->body}}"><div class="advertisement card p-2">
+                <p>{{$post->title}}</p>
+                    <div class="card-body">   
+                        @if(!empty(trim($post->image)))
+                            <div>
+                                <img width="auto" height="150px" src="{{ asset("uploads/". $post->image) }}" class="card-img-top" alt="Product Image">
+                            </div>
+                        @endif
+                    </div>
+                </div></a>
+            </div>
+          @endif
+      @endforeach
+    </div>
+  </div>
 
 
 
