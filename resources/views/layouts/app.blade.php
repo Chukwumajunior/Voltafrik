@@ -39,6 +39,7 @@
             <nav id="navbar" class="navbar">
                 <ul>
                 <li><a class="nav-link scrollto active" href="/">Home</a></li>
+                <li><a class="nav-link" href="/portfolio">Portfolio</a></li>
                 <li class="dropdown"><a href="#"><span>Product</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                     <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-right"></i></a>
@@ -172,11 +173,11 @@
                     <h4>Our Social Networks</h4>
                     <p>Bellow are our social media handles</p>
                     <div class="social-links mt-3">
-                        <a href="https://twitter.com/ChukwumaOhadoma" class="twitter"><i class="bx bxl-twitter" target="_blank"></i></a>
-                        <a href="https://web.facebook.com/people/Voltafrik/61557974579735/" class="facebook" target="_blank"><i class="bx bxl-facebook"></i></a>
-                        <a href="https://www.instagram.com/voltafrik/" class="instagram" target="_blank"><i class="bx bxl-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/chukwuma-innocent-91aaaa284/" class="linkedin" target="_blank"><i class="bx bxl-linkedin"></i></a>
-                    </div>
+                        <a href="https://twitter.com/ChukwumaOhadoma" target="blank" class="twitter"><i class="bx bxl-twitter"></i></a>
+                        <a href="https://web.facebook.com/people/Voltafrik/61557974579735/" target="blank" class="facebook"><i class="bx bxl-facebook"></i></a>
+                        <a href="https://www.instagram.com/voltafrik/" target="blank" class="instagram"><i class="bx bxl-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/chukwuma-innocent-91aaaa284/" target="blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                      </div>
                 </div>
 
                 </div>

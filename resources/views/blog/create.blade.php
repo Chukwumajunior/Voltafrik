@@ -8,7 +8,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.0.0/classic/ckeditor.js"></script>
+    <!-- CSS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <!-- JavaScript -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -23,6 +27,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../stores">Store</a>
+                    </li>
+                    @if(Auth::User())
+                        <li class="nav-item">
+                            <a class="nav-link" href="../profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/logout') }}">logout</a>
+                        </li>
+                    @endif
                 </ul>
             </div>
         </nav>
@@ -47,39 +68,41 @@
                                 <input type="text" id="title" class="form-control" name="title"
                                 placeholder="Enter Post Title" required>
                             </div>
-                            <div class="control-group col-12 mt-2">
+                            <div class="control-group col-12 mt-2" style="padding-bottom: 6rem">
                                 <label for="body">Post Body</label>
+                                <!-- Add an ID for Quill editor -->
+                                <div id="quill-editor"></div>
+                                <!-- Hide the textarea -->
                                 <textarea id="body" class="form-control" name="body" placeholder="Enter Post Body"
-                                          rows="5" required></textarea>
+                                          rows="5" required style="display: none;"></textarea>
                             </div>
-                            <div class="control-group col-12 mt-2">
-                                <div class="form-group mb-3">CONFIRM SUBJECT
-                                    <select class="block mt-1 w-full border-gray-300 rounded-md" type="text" name="category" :value="old('category')" required>
-                                        <option value="fashion">Fashion</option>
-                                        <option value="socials">Socials</option>
-                                        <option value="vehicles">Vehicles</option>
-                                        <option value="solar_inverter">Solar and Inverters</option>
-                                        <option value="smart_gadgets" selected>Smart Gadgets</option>
-                                        <option value="tech_news">Tech News</option>
-                                        @if (Auth::User()->user_role == 'admin')    
-                                            <option value="web_project" selected>Web Projects</option>
-                                            <option value="data_project" >Data Projects</option>
-                                            <option value="smart_house_project" >Smart House Projects</option>
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-                        
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">Feature Image</label>
                                 <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" 
                                 accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
                             </div>
+                            <div class="control-group col-12 mt-2">
+                                <div class="form-group mb-3">
+                                    <label for="category-select">Category</label>
+                                    <select id="category-select" class="form-control" name="category" :value="old('category')" required>
+                                        <option value="fashion">Fashion</option>
+                                        <option value="socials">Socials</option>
+                                        <option value="vehicles">Vehicles</option>
+                                        <option value="solar_inverter">Solar and Inverters</option>
+                                        <option value="tech_news">Tech News</option>
+                                        <option value="smart_gadgets" selected>Smart Gadgets</option>
+                                        @if (Auth::User()->user_role == 'admin')    
+                                            <option value="web_project" selected>Web Projects</option>
+                                            <option value="data_project">Data Projects</option>
+                                            <option value="smart_house_project">Smart House Projects</option>
+                                        @endif
+                                    </select>
+                                </div>
                             </div>
-
-                            <div class="form-group mb-3">
-                                <label for="type-select">KINDLY INDICATE TYPE</label>
-                                <select id="type-select" class="block mt-1 w-full border-gray-300 rounded-md" type="text" name="type" :value="old('type')" required>
+                        
+                            <div class="form-group col-12 mt-2">
+                                <label for="type-select">Type</label>
+                                <select id="type-select" class="form-control" name="type" :value="old('type')" required>
                                     <option value="Information" selected>Information</option>
                                     <option value="Market">Market: displays on the store</option>
                                     @if (Auth::User()->user_role == 'admin')    
@@ -88,22 +111,19 @@
                                         <option value="wall_main">Wall Main</option>
                                         <option value="wall_image">Wall Image</option>
                                         <option value="wall_video">Wall Video</option>
+                                        <option value="executives">Executives</option>
                                     @endif
                                 </select>
                             </div>
                             
-                            <div id="price-input" style="display: none;" class="form-group mb-3">
-                                <label for="price">Price:</label>
-                                <input class="block mt-1 w-full border-gray-300 rounded-md" type="text" name="price" id="price" value="{{ old('price') }}">
-                             
+                            <div id="price-input" style="display: none;" class="form-group col-12">
+                                <label for="price">Price</label>
+                                <input class="form-control" type="text" name="price" id="price">
                             </div>
-                        
                         </div>
                         <div class="row mt-2">
                             <div class="control-group col-12 text-center">
-                                <button id="btn-submit" class="btn btn-primary">
-                                    Create Post
-                                </button>
+                                <button id="btn-submit" class="btn btn-primary">Create Post</button>
                             </div>
                         </div>
                     </form>
@@ -130,15 +150,26 @@
             }
         });
     </script>
-
-
-<script>
-    ClassicEditor
-        .create(document.querySelector('textarea'))
-        .catch(error => {
-            console.error(error);
+    
+    <script>
+        // Initialize Quill
+        var quill = new Quill('#quill-editor', {
+            theme: 'snow', // Specify the theme
+            placeholder: 'Enter Post Body', // Specify the placeholder text
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['link', 'image'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['clean']
+                ]
+            }
         });
-</script>
+        quill.on('text-change', function(delta, oldDelta, source) {
+            document.getElementById('body').value = quill.root.innerHTML;
+        });
+    </script>
 
     
 </body>

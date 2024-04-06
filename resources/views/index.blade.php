@@ -439,82 +439,29 @@
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>Team</h2>
-        <p>Our Team includes a Chief Technology Officer, Chief Executive Officer, Product Manager, and Accountant</p>
+        <h2>Our Team</h2>
       </div>
 
       <div class="row">
-
-        <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
-          <div class="member d-flex align-items-start">
-            <div class="pic"><img src="assets/img/profile.png" class="img-fluid" alt=""></div>
-            <div class="member-info">
-              <h4>Ohadoma Chukwuma</h4>
-              <span>Chief Executive Officer</span>
-              <p>Loading...</p>
-              <div class="social">
-                <a href=""><i class="ri-twitter-fill"></i></a>
-                <a href=""><i class="ri-facebook-fill"></i></a>
-                <a href=""><i class="ri-instagram-fill"></i></a>
-                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+        @foreach ($posts as $post)
+          @if ($post->type == "executives")
+            <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
+              <div class="member d-flex align-items-start">
+                <div class="pic"><img src="{{ asset("uploads/". $post->image) }}" class="img-fluid" alt=""></div>
+                <div class="member-info">
+                  <h4>{{$post->title}}</h4>
+                  <span>{!! $post->body !!}</span>
+                  <div class="social">
+                    <a href="https://twitter.com/ChukwumaOhadoma" target="blank"><i class="ri-twitter-fill"></i></a>
+                    <a href="https://web.facebook.com/people/Voltafrik/61557974579735/" target="blank"><i class="ri-facebook-fill"></i></a>
+                    <a href="https://www.instagram.com/voltafrik/" target="blank"><i class="ri-instagram-fill"></i></a>
+                    <a href="https://www.linkedin.com/in/chukwuma-innocent-91aaaa284/" target="blank"> <i class="ri-linkedin-box-fill"></i> </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
-          <div class="member d-flex align-items-start">
-            <div class="pic"><img src="assets/img/profile.png" class="img-fluid" alt=""></div>
-            <div class="member-info">
-              <h4>Ogbonna Precious</h4>
-              <span>Product Manager</span>
-              <p>Loading...</p>
-              <div class="social">
-                <a href=""><i class="ri-twitter-fill"></i></a>
-                <a href=""><i class="ri-facebook-fill"></i></a>
-                <a href=""><i class="ri-instagram-fill"></i></a>
-                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-          <div class="member d-flex align-items-start">
-            <div class="pic"><img src="assets/img/profile.png" class="img-fluid" alt=""></div>
-            <div class="member-info">
-              <h4>Abazie Divine</h4>
-              <span>CTO</span>
-              <p>Loading...</p>
-              <div class="social">
-                <a href=""><i class="ri-twitter-fill"></i></a>
-                <a href=""><i class="ri-facebook-fill"></i></a>
-                <a href=""><i class="ri-instagram-fill"></i></a>
-                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-          <div class="member d-flex align-items-start">
-            <div class="pic"><img src="assets/img/profile.png" class="img-fluid" alt=""></div>
-            <div class="member-info">
-              <h4>John Emmanuel</h4>
-              <span>Accountant</span>
-              <p>Loading...</p>
-              <div class="social">
-                <a href=""><i class="ri-twitter-fill"></i></a>
-                <a href=""><i class="ri-facebook-fill"></i></a>
-                <a href=""><i class="ri-instagram-fill"></i></a>
-                <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-
+          @endif
+        @endforeach
       </div>
 
     </div>
@@ -676,7 +623,6 @@
   </div>
 
 
-
   <!-- ======= Contact Section ======= -->
   <section id="contact" class="contact">
     <div class="container" data-aos="fade-up">
@@ -687,7 +633,7 @@
 
       <div class="row">
 
-        <div class="col-lg-5 d-flex align-items-stretch">
+        <div class="col-lg-12 d-flex align-items-stretch">
           <div class="info">
             <div class="address">
               <i class="bi bi-geo-alt"></i>
@@ -711,37 +657,8 @@
           </div>
 
         </div>
-{{-- 
-        <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-          <form action="{{ route('contact.store') }}" method="post" role="form" class="php-email-form">
-            @csrf
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label for="name">Your Name</label>
-                <input type="text" name="name" class="form-control" id="name" required>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="name">Your Email</label>
-                <input type="email" class="form-control" name="email" id="email" required>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="name">Subject</label>
-              <input type="text" class="form-control" name="subject" id="subject" required>
-            </div>
-            <div class="form-group">
-              <label for="name">Message</label>
-              <textarea class="form-control" name="message" rows="10" required></textarea>
-            </div>
-            <div class="my-3">
-              <div class="loading">Loading</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Your message has been sent. Thank you!</div>
-            </div>
-            <div class="text-center"><button type="submit">Send Message</button></div>
-          </form>
-        </div> --}}
-        <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+
+        {{-- <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
           <form action="{{ route('contact.store') }}" method="post" role="form" class="php-email-form">
             @csrf <!-- Include this line to add the CSRF token field -->
             <div class="row">
@@ -770,7 +687,7 @@
             <div class="text-center"><button type="submit">Send Message</button></div>
           </form>
         </div>
-      </div>
+      </div> --}}
 
     </div>
   </section><!-- End Contact Section -->

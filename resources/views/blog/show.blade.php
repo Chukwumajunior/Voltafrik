@@ -128,7 +128,6 @@
   <body>
     <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/blog">Voltablog</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -137,6 +136,23 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../blog">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../portfolio">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../stores">Store</a>
+                </li>
+                @if(Auth::User())
+                    <li class="nav-item">
+                        <a class="nav-link" href="../profile">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/logout') }}">logout</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </nav>
@@ -144,14 +160,14 @@
   
   <div class="container post">
       <div class="post-content">
-          <a href="/blog" class="btn btn-outline-primary btn-sm">Go back</a>
+          {{-- <a href="/my_posts" class="btn btn-outline-primary btn-sm">Go back</a> --}}
           <h1 class="display-one">{{ ucfirst($post->title) }}</h1>
           @if(!empty(trim($post->image)))
           <div class="container text-center">
               <img src="{{ asset("uploads/". $post->image) }}" alt="blog image" height="350px" width="auto"/>
           </div>
           @endif 
-          <p class="post-meta">Published on: {{ $post->created_at->format('F j, Y') }}</p>
+          <p class="post-meta">Published on: {{ $post->created_at->format('F j, Y') }} || Updated on: {{ $post->updated_at->format('F j, Y') }}</p>
           <p class="author">By: {{ $post->user_id }} || Category: {{ $post->category }}</p>
           <p class="content">{!! $post->body !!}</p>
           @if ($post->type == 'Market')
@@ -167,6 +183,7 @@
                     @method('DELETE')
                     <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this post?')">Delete Post</button>
                 </form>
+                <a href="../my_posts" class="btn-close-white">See author's posts</a>
                 <br><br>
             @endif
           @endif
@@ -179,7 +196,7 @@
     </div>
     <div class="row" style="display: flex; flex-wrap: wrap;">
         @foreach($posts as $post1)
-            @if(($post1->category == $post->category) && ($post1->type != "Portfolio") && ($post1->type != "wall_video") && ($post1->type != "advert"))
+            @if(($post1->category == $post->category) && ($post1->type != "Portfolio") && ($post1->type != "wall_video") && ($post1->type != "advert") & ($post1->type != "executives"))
                 <div class="col-md-2 mb-4" style="flex: 0 0 auto;">
                     <div class="card h-100">&nbsp&nbsp&nbsp
                         @if(!empty(trim($post1->image)))

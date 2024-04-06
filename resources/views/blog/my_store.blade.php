@@ -19,16 +19,39 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../stores">Store</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../portfolio">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../blog">Blog</a>
+                </li>
+                @if (Auth::user())
+                  @if((Auth::user()->user_role == 'admin') || (Auth::user()->user_role == 'colab'))
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                      <a class="nav-link" href="../blog/create/post">Create Post</a>
                     </li>
+                  @endif
+                @endif
+                @if(Auth::User())
+                  <li class="nav-item">
+                    <a class="nav-link" href="../profile">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/logout') }}">logout</a>
+                  </li>
+                @endif
                 </ul>
             </div>
         </nav>
     </header>
 
   <div class="container">
-    <a href="/stores" class="btn btn-outline-primary btn-sm">Go back</a>
     <!-- Store Header -->
     <header class="py-4 text-center">
       <h1>User's Store</h1>
@@ -44,10 +67,10 @@
               <li class="list-group-item">Location: <span id="location">Loading...</span></li>
               @foreach ($users as $user)
                 @if ($user->name == $blogPost->user_id)
-                  <li class="list-group-item">Contact: {{ $user->email }} | {{ $user->tel }}</li>
+                  <li class="list-group-item">Contact: {{ $user->email }} || {{ $user->tel }}</li>
                 @endif
               @endforeach
-              <li class="list-group-item">Management: voltademy@gmail.com | +2349034152070</li>
+              <li class="list-group-item">Management: voltademy@gmail.com || +2349034152070</li>
             </ul>
             @foreach ($users as $user)
               @if ($user->name == $blogPost->user_id)
@@ -60,6 +83,16 @@
                     <p class="card-text">{!! ucfirst($blogPost->body) !!}</p>
                     <p class="card-text">Price: {{ $blogPost->price }}</p>
                   </div>
+                  @if (Auth::user())
+                    @if(Auth::user()->name == $blogPost->user_id)
+                      <a href="/blog/{{ $blogPost->id }}/edit" class="btn">Edit Post</a>
+                      <form method="POST" action="/blog/{{ $blogPost->id }}" style="display:inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete this post?')">Delete Post</button>
+                      </form>
+                    @endif
+                  @endif
                 </div>
               @endif
             @endforeach

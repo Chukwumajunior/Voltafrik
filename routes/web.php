@@ -86,6 +86,7 @@ Route::get('/blog',  [BlogPostController::class, 'index']);
 Route::get('/blog/{blogPost}', [BlogPostController::class, 'show']);
 Route::get('/stores', [BlogPostController::class, 'market']);
 Route::get('/blog/author/{blogPost}', [BlogPostController::class, 'author']);
+Route::get('/store/{blogPost}', [BlogPostController::class, 'my_store']);
 
 Route::middleware('blogPosts')->group(function () {
     Route::get('/blog/create/post', [BlogPostController::class, 'create']);
@@ -94,7 +95,6 @@ Route::middleware('blogPosts')->group(function () {
     Route::put('/blog/{blogPost}/edit', [BlogPostController::class, 'update']);
     Route::delete('/blog/{blogPost}', [BlogPostController::class, 'destroy']);
     Route::get('/my_posts', [BlogPostController::class, 'my_posts']);
-    Route::get('/store/{blogPost}', [BlogPostController::class, 'my_store']);
     Route::get('/store_category', [BlogPostController::class, 'store_category']);
 
 });

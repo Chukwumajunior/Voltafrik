@@ -1,17 +1,48 @@
 @extends('layout.app2')
 
-@section('content')   
+@section('content')  
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="../blog">Blog</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="../portfolio">Portfolio</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="../stores">Store</a>
+              </li>
+              @if(Auth::User())
+                  <li class="nav-item">
+                      <a class="nav-link" href="../profile">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/logout') }}">logout</a>
+                  </li>
+              @endif
+          </ul>
+      </div>
+  </nav>
+</header>
     
   <!-- ======= About Us Section ======= -->
   <div class="container">
     <div class="container" data-aos="fade-u">
-      <div class="section-title">
-        <a href="/blog" class="btn btn-outline-primary btn-sm">Go back</a>
-      </div>
-
     </div>
     <div class="container">
-      <h1>Your Posts</h1>
+      @foreach($posts as $post)
+        <h1>Welcome To {{$post->user_id}}'s Blog</h1>
+        @break
+      @endforeach
       <div class="row" style="display: flex; flex-wrap: wrap;">
         @foreach($posts as $post)
           @if($post->user_id == Auth::user()->name)
