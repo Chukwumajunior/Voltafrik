@@ -97,7 +97,7 @@
               <li><i class="dropdown bx bx-chevron-right"></i><a href="#">Stores</a></i>
             </ul>
           </div>
-          <div class="col-lg-3 col-md-6 footer-links">
+          <div class="col-lg-3 col-md-6 footer-links text-center">
             <h4>Our Social Networks</h4>
             <p>Bellow are our social media handles</p>
             <div class="social-links mt-3">

@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name') }}</title>
+        <link rel="icon" type="image/gif" href="{{ asset('assets/img/logo/logo5.png') }}">
 
         <!-- Fonts -->
         <!-- Google Fonts -->
@@ -22,6 +23,19 @@
 
         <!-- Template Main CSS File -->
         <link href="assets/css/style.css" rel="stylesheet">
+        <script>
+            window.watsonAssistantChatOptions = {
+              integrationID: "3d583b9f-6ef4-4ef3-8c58-661d6410d126", // The ID of this integration.
+              region: "eu-gb", // The region your integration is hosted in.
+              serviceInstanceID: "ca6fc8ae-b9c5-421b-9fe1-b3231485a0e3", // The ID of your service instance.
+              onLoad: async (instance) => { await instance.render(); }
+            };
+            setTimeout(function(){
+              const t=document.createElement('script');
+              t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+              document.head.appendChild(t);
+            });
+          </script>
 
         <!-- Scripts -->
     </head>

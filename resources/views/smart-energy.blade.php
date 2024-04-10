@@ -2,9 +2,8 @@
 @section('content')
 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center" style="background-image: url(assets/img/solar_bg.jpg); background-size: cover; background-repeat: no-repeat">
-
-  <div class="container">
+<section class="hero-section d-flex align-items-center" style="color: white; background-image: url(assets/img/solar_bg2.jpg); background-size: cover; background-repeat: no-repeat">
+  <div class="container" style="padding-bottom: 8rem; padding-top: 7rem">
     <div class="row">
       <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
         <h1>Smart Energy Systems</h1>

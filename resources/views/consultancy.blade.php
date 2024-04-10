@@ -7,7 +7,7 @@
 
     <h1 class="logo me-auto"><a href="#hero">Voltafrik</a></h1>
     <!-- Uncomment below if you prefer to use an image logo -->
-    <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    {{-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> --}}
 
     <nav id="navbar" class="navbar">
       <ul>
@@ -15,6 +15,7 @@
         <li><a class="nav-link scrollto" href="#about">Account</a></li>
         <li><a class="nav-link scrollto" href="#services">Needs</a></li>
         <li><a class="nav-link scrollto" href="#team">Chat</a></li>
+        <li><a class="nav-link scrollto" href="portfolio">Portfolio</a></li>
         <li class="dropdown"><a href="#"><span>Product</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
             <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-right"></i></a>
@@ -46,9 +47,8 @@
 </header><!-- End Header -->
 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center" style=" background-image: url(assets/img/bg07.jpg); background-size: cover; background-repeat: no-repeat">
-
-  <div class="container">
+<section class="hero-section d-flex align-items-center" style="color: white; background-image: url(assets/img/bg07.jpg); background-size: cover; background-repeat: no-repeat">
+  <div class="container" style="padding-bottom: 8rem; padding-top: 7rem">
     <div class="row">
       <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
         <h1>Consultancy</h1>
@@ -222,7 +222,7 @@
     <div class="container" data-aos="fade-up">
 
       <div class="section-title">
-        <h2>Chat with Volt</h2>
+        <h2>Click the blue chat icon at the bottom right corner of your page to Chat with Volt</h2>
       </div>
 
     

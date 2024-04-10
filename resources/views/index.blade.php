@@ -10,11 +10,11 @@
 
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a class="nav-link scrollto active" href="/">Home</a></li>
         <li><a class="nav-link scrollto" href="#about">About</a></li>
         <li><a class="nav-link scrollto" href="#skills">Distribution</a></li>
-        <li><a class="nav-link   scrollto" href="/portfolio">Portfolio</a></li>
         <li><a class="nav-link scrollto" href="#team">Team</a></li>
+        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        {{-- <li><a class="nav-link scrollto" href="#portfolio">Advert</a></li> --}}
         <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
             <li class="dropdown"><a href="#"><span>Distribution</span> <i class="bi bi-chevron-right"></i></a>
@@ -32,8 +32,8 @@
             <li><a href="privacy">Privacy Policy</a></li>
           </ul>
         </li>
+        <li><a class="nav-link   scrollto" href="/portfolio">Portfolio</a></li>
         {{-- <li><a class="nav-link scrollto" href="#about">All_Blog</a></li> --}}
-        <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         @if(Auth::user())
           <li><a class="nav-link" href="profile">Profile</a></li>
         @endif
@@ -50,31 +50,30 @@
   </div>
 </header><!-- End Header --> 
 <!-- ======= Hero Section ======= -->
-<section id="hero" class="d-flex align-items-center" style="background-image: url(assets/img/bg06.jpg); background-size: cover; background-repeat: no-repeat">
-
-  <div class="container">
+<section class="hero-section d-flex align-items-center" style="color: white; background-image: url(assets/img/bg06.jpg); background-size: cover; background-repeat: no-repeat">
+  <div class="container" style="padding-bottom: 8rem; padding-top: 7rem">
     <div class="row">
-      <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
+      <div class="col-lg-6 d-flex flex-column justify-content-center order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
         @if(Auth::user())
-          <h2>Welcome {{ Auth::user()->name }}</h2>
+          <h3>Welcome, {{ Auth::user()->name }}!</h3>
         @endif
-        <h1>Better Solutions For Your Business and Home</h1>
-        <h2>We are a team of talented engineers making the best of technology to serve you</h2>
+        <h5>We've Got the Best Solution For Your Business and Home</h5>
+        <p>We are a team of talented engineers making the best use of technology to serve you.</p>
         <div class="d-flex justify-content-center justify-content-lg-start">
           @if(!Auth::user())
-            <a href="/consultancy" class="btn-get-started">Get Started</a>
+            <a href="/consultancy" class="btn btn-get-started btn-danger">Get Started</a>
           @endif
           @foreach ($posts as $post)
             @if($post->type == "wall_video")
-              <a href="{{$post->body}}" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+              <a href="{{$post->body}}" class="glightbox btn btn-watch-video btn-info"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
             @endif
           @endforeach
         </div>
       </div>
     </div>
   </div>
+</section>
 
-</section><!-- End Hero -->
 
 <main id="main">
 
@@ -114,8 +113,8 @@
   </section><!-- End Clients Section --> --}}
 
   <!-- ======= About Us Section ======= -->
-  <section id="about" class="about">
-    <div class="container" data-aos="fade-u">
+  <section id="about" class="about" style="background-color: #e1ebe1">
+    <div class="container p-4" data-aos="fade-u">
       <div class="section-title">
         <h2>About Us</h2>  
       </div>
@@ -134,8 +133,9 @@
           @endif
         @endforeach
       </div>
+    </div>
     
-    
+    <div class="container p-4" data-aos="fade-u">
       <div id="postContainer" class="row">
         @foreach ($posts as $post)
             @if($post->type == "wall_image")
@@ -159,10 +159,7 @@
             @endif
         @endforeach
       </div>
-    </div>
-    
-    </div>
-    
+    </div>  
   </section><!-- End About Us Section -->
 
   <!-- ======= Why Us Section ======= -->
@@ -281,7 +278,7 @@
   </section><!-- End Skills Section -->
 
   <!-- ======= Services Section ======= -->
-  <section id="services" class="services section-bg">
+  <section id="services" class="services section-bg" style="background-color: #efe8e9">
     <div class="container-fluid" data-aos="fade-up">
 
       <div class="section-title">
@@ -467,77 +464,6 @@
     </div>
   </section><!-- End Team Section -->
 
-  <!-- ======= Pricing Section ======= -->
-  <section id="pricing" class="pricing">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-title">
-        <h2>Pricing</h2>
-        <p>The prcing bellow reveals our least price for all the tiers of packages available for our customers.</p>
-      </div>
-
-      <div class="row">
-
-        <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
-          <div class="box">
-            <h3>Inverter/Solar</h3>
-            <img width="200px" height="100px" src="assets/img/inverter.jpg">
-            <ul>
-              <li><i class="bx bx-check"></i> Professional/<strong><sup>$</sup>15400+</strong></li>
-              <li><i class="bx bx-check"></i> Intermediate/<strong><sup>$</sup>1500+</strong></li>
-              <li><i class="bx bx-check"></i> Junior/<strong><sup>$</sup>300+</strong></li>
-              {{-- <li class="na"><i class="bx bx-x"></i> <span>Pharetra massa massa ultricies</span></li> --}}
-              
-            </ul>
-            <a href="smart-energy" class="buy-btn">Get Product</a>
-          </div>
-        </div>
-
-        <div class="col-lg-3 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="200">
-          <div class="box featured">
-            <h3>Website Plan</h3>
-            <img width="200px" height="100px" src="assets/img/web2.jpg">
-            <ul>
-              <li><i class="bx bx-check"></i> Professional/<strong><sup>$</sup>10000+</strong></li>
-              <li><i class="bx bx-check"></i> Intermediate/<strong><sup>$</sup>1000+</strong></li>
-              <li><i class="bx bx-check"></i> Junior/<strong><sup>$</sup>200+</strong></li>
-            </ul>
-            <a href="website" class="buy-btn">Get Product</a>
-          </div>
-        </div>
-
-        <div class="col-lg-3 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-          <div class="box">
-            <h3>Data Analysis</h3>
-            <img width="200px" height="100px" src="assets/img/data.png">
-            <ul>
-              <li><i class="bx bx-check"></i> Professional/<strong><sup>$</sup>900+</strong></li>
-              <li><i class="bx bx-check"></i> Intermediate/<strong><sup>$</sup>200+</strong></li>
-              <li><i class="bx bx-check"></i> Junior/<strong><sup>$</sup>50+</strong></li>
-            </ul>
-            <a href="data-analysis" class="buy-btn">Get Product</a>
-          </div>
-        </div>
-
-        
-        <div class="col-lg-3 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-          <div class="box">
-            <h3>Smart House</h3>
-            <img width="200px" height="100px" src="assets/img/smart.png">
-            <ul>
-              <li><i class="bx bx-check"></i> Professional/<strong><sup>$</sup>9000+</strong></li>
-              <li><i class="bx bx-check"></i> Intermediate/<strong><sup>$</sup>800+</strong></li>
-              <li><i class="bx bx-check"></i> Junior/<strong><sup>$</sup>100+</strong></li>
-            </ul>
-            <a href="smart-house" class="buy-btn">Get Product</a>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Pricing Section -->
-
   <!-- ======= Frequently Asked Questions Section ======= -->
   <section id="faq" class="faq section-bg">
     <div class="container" data-aos="fade-up">
@@ -600,26 +526,28 @@
     </div>
   </section><!-- End Frequently Asked Questions Section -->
 
-  <div class="container pt-4">
-    <div class="row">
-      <h4 style="text-align: center; color: tomato">Advertisement</h4>
-      @foreach ($posts as $post)
-          @if($post->type == "advert")
-            <div class="col-md-3"> <!-- Adjust column size based on your layout preference -->
-              <a href="{{$post->body}}"><div class="advertisement card p-2">
-                <p>{{$post->title}}</p>
-                    <div class="card-body">   
-                        @if(!empty(trim($post->image)))
-                            <div>
-                                <img width="auto" height="150px" src="{{ asset("uploads/". $post->image) }}" class="card-img-top" alt="Product Image">
-                            </div>
-                        @endif
-                    </div>
-                </div></a>
-            </div>
-          @endif
-      @endforeach
-    </div>
+  <section id="portfolio" class="portfolio">
+    <div class="container pt-4" >
+      <div class="row">
+        <h4 style="text-align: center; color: tomato">Advertisement</h4>
+        @foreach ($posts as $post)
+            @if($post->type == "advert")
+              <div class="col-md-3"> <!-- Adjust column size based on your layout preference -->
+                <a href="{{$post->body}}" target="blank"><div class="advertisement card p-2">
+                  <p>{{$post->title}}</p>
+                      <div class="card-body">   
+                          @if(!empty(trim($post->image)))
+                              <div>
+                                  <img width="auto" height="150px" src="{{ asset("uploads/". $post->image) }}" class="card-img-top" alt="Product Image">
+                              </div>
+                          @endif
+                      </div>
+                  </div></a>
+              </div>
+            @endif
+        @endforeach
+      </div>
+    </section>
   </div>
 
 

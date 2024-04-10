@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Post</title>
+    <title>{{ config('app.name') }}: Create Post</title>
+    <link rel="icon" type="image/gif" href="{{ asset('assets/img/logo/logo5.png') }}">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- CSS -->
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-
-    <!-- JavaScript -->
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -28,20 +22,20 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../blog">Blog</a>
+                        <a class="nav-link" href="../../blog">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../portfolio">Portfolio</a>
+                        <a class="nav-link" href="../../portfolio">Portfolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../stores">Store</a>
+                        <a class="nav-link" href="../../stores">Store</a>
                     </li>
                     @if(Auth::User())
                         <li class="nav-item">
-                            <a class="nav-link" href="../profile">Profile</a>
+                            <a class="nav-link" href="../../profile">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/logout') }}">logout</a>
+                            <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
                         </li>
                     @endif
                 </ul>
@@ -50,57 +44,47 @@
     </header>
 
     <!-- Content -->
-    <div class="container-fluid blog-page">  <div class="container-fluid blog-page" style="background-image: url(assets/img/blog.jpg); background-size: cover; background-repeat: no-repeat">
-        <div class="row">
-            <div class="col-12 pt-2">
-                <a href="/blog" class="btn btn-outline-primary btn-sm">Go back</a>
-                <div class="rounded mt-5 pl-4 pr-4 pt-4 pb-4">
-                    <h1 class="display-4">Create a New Post</h1>
-                    <p>Fill and submit this form to create a post</p>
-
-                    <hr>
-
-                    <form enctype="multipart/form-data" action="" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="control-group col-12">
+    <div class="container-fluid blog-page" style="background-image: url(assets/img/blog.jpg); background-size: cover; background-repeat: no-repeat">
+        <div class="row justify-content-center">
+            <div class="col-md-8 mt-5">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="display-4 text-center">Create a New Post</h2>
+                    </div>
+                    <div class="card-body">
+                        <form enctype="multipart/form-data" action="" method="POST">
+                            @csrf
+                            <div class="form-group">
                                 <label for="title">Post Title</label>
-                                <input type="text" id="title" class="form-control" name="title"
-                                placeholder="Enter Post Title" required>
+                                <input type="text" id="title" class="form-control" name="title" placeholder="Enter Post Title" required>
                             </div>
-                            <div class="control-group col-12 mt-2" style="padding-bottom: 6rem">
+                            <div class="form-group">
                                 <label for="body">Post Body</label>
-                                <!-- Add an ID for Quill editor -->
                                 <div id="quill-editor"></div>
-                                <!-- Hide the textarea -->
-                                <textarea id="body" class="form-control" name="body" placeholder="Enter Post Body"
-                                          rows="5" required style="display: none;"></textarea>
+                                <textarea id="body" class="form-control" name="body" placeholder="Enter Post Body" rows="5" style="display: none;"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleFormControlFile1">Feature Image</label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" 
-                                accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
+                                <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/webp">
                             </div>
-                            <div class="control-group col-12 mt-2">
-                                <div class="form-group mb-3">
-                                    <label for="category-select">Category</label>
-                                    <select id="category-select" class="form-control" name="category" :value="old('category')" required>
-                                        <option value="fashion">Fashion</option>
-                                        <option value="socials">Socials</option>
-                                        <option value="vehicles">Vehicles</option>
-                                        <option value="solar_inverter">Solar and Inverters</option>
-                                        <option value="tech_news">Tech News</option>
-                                        <option value="smart_gadgets" selected>Smart Gadgets</option>
-                                        @if (Auth::User()->user_role == 'admin')    
-                                            <option value="web_project" selected>Web Projects</option>
-                                            <option value="data_project">Data Projects</option>
-                                            <option value="smart_house_project">Smart House Projects</option>
-                                        @endif
-                                    </select>
-                                </div>
+                            <div class="form-group">
+                                <label for="category-select">Category</label>
+                                <select id="category-select" class="form-control" name="category" :value="old('category')" required>
+                                    <option value="fashion">Fashion</option>
+                                    <option value="socials">Socials</option>
+                                    <option value="vehicles">Vehicles</option>
+                                    <option value="solar_inverter">Solar and Inverters</option>
+                                    <option value="tech_news">Tech News</option>
+                                    <option value="smart_gadgets" selected>Smart Gadgets</option>
+                                    @if (Auth::User()->user_role == 'admin')    
+                                        <option value="web_project" selected>Web Projects</option>
+                                        <option value="data_project">Data Projects</option>
+                                        <option value="smart_house_project">Smart House Projects</option>
+                                        <option value="advert">Advert</option>
+                                    @endif
+                                </select>
                             </div>
-                        
-                            <div class="form-group col-12 mt-2">
+                            <div class="form-group">
                                 <label for="type-select">Type</label>
                                 <select id="type-select" class="form-control" name="type" :value="old('type')" required>
                                     <option value="Information" selected>Information</option>
@@ -115,29 +99,32 @@
                                     @endif
                                 </select>
                             </div>
-                            
-                            <div id="price-input" style="display: none;" class="form-group col-12">
+                            <div id="price-input" style="display: none;" class="form-group">
                                 <label for="price">Price</label>
                                 <input class="form-control" type="text" name="price" id="price">
                             </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="control-group col-12 text-center">
-                                <button id="btn-submit" class="btn btn-primary">Create Post</button>
+                            <div class="form-group text-center">
+                                <button id="btn-submit" class="btn btn-primary btn-lg">Create Post</button>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
- <!-- Footer -->
+
+    <!-- Footer -->
     <footer class="footer mt-auto py-3 bg-light">
         <div class="container text-center">
             <span class="text-muted">Voltafrik &copy; 2023</span>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
         document.getElementById("type-select").addEventListener("change", function() {
             var selectedOption = this.value;
@@ -149,9 +136,7 @@
                 priceInput.style.display = "none";
             }
         });
-    </script>
-    
-    <script>
+
         // Initialize Quill
         var quill = new Quill('#quill-editor', {
             theme: 'snow', // Specify the theme
@@ -170,7 +155,5 @@
             document.getElementById('body').value = quill.root.innerHTML;
         });
     </script>
-
-    
 </body>
 </html>
