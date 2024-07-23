@@ -1,89 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ config('app.name') }}</title>
-    <link rel="icon" type="image/gif" href="{{ asset('assets/img/logo/logo5.png') }}">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
-<body>
-  <div class="container">
-  <!-- Header -->
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../stores">Store</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="../blog">Blog</a>
-                </li>
-                @if (Auth::user())
-                  @if(Auth::user()->user_role == 'admin')
-                    <li class="nav-item">
-                      <a class="nav-link" href="../blog/create/post">Create Post</a>
-                    </li>
-                  @endif
-                @endif
-                @if(Auth::User())
-                  <li class="nav-item">
-                    <a class="nav-link" href="../profile">Profile</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/logout') }}">logout</a>
-                  </li>
-                @endif
-            </ul>
-        </div>
-      </nav>
-    </header>
-    
+@extends('layout.blog_app')
+@section('content')
+ 
+  <section>
   <!-- ======= About Us Section ======= -->
-  <div class="container">
-    <div class="container" data-aos="fade-u">
-    </div>
-    <div class="container">
-      @foreach($posts as $post)
-        <h1>Welcome To {{$post->user_id}}'s Blog</h1>
-        @break
-      @endforeach
-      <div class="row" style="display: flex; flex-wrap: wrap;">
+    <div class="container pt-4" data-aos="fade-u">
+      <div class="container">
         @foreach($posts as $post)
-          @if($post->user_id == Auth::user()->name && $post->category != "advert" && $post->type != "wall_video")
-            <div class="col-md-2 mb-4" style="flex: 0 0 auto;">
-                <div class="card h-100">&nbsp&nbsp&nbsp
-                    @if(!empty(trim($post->image)))
-                        <img style="width: auto; height: 100px;" src="{{ asset("uploads/". $post->image) }}" class="card-img-top" alt="Product Image">
-                    @endif
-                    <div class="card-body">
-                        <a class="card-title" href="/blog/{{ $post->id }}">{{ \Illuminate\Support\Str::limit($post->title ?? '',20,' ...') }}</a>
-                    </div>
-                </div>
-            </div>
+          @if(Auth::user())
+            @if(Auth::user()->name == $post->user_id)
+                <h1>Dear {{ $post->user_id }}, welcome to your Blog</h1>
+            @break
+            @else
+                <h1>Welcome to {{ $post->user_id }}'s Blog</h1>
+            @break
+            @endif
+          @else
+            <h1>Welcome to {{ $post->user_id }}'s Blog</h1>
+          @break
           @endif
         @endforeach
+        <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search by post title">
+        <!-- Display Posts -->
+        <div class="row" style="display: flex; flex-wrap: wrap;" id="postsContainer">
+            @php
+                $filteredPosts = $posts->filter(function ($post) {
+                    return $post->category != "Advert" && $post->type != "Wall video" && $post->type != "Executives";
+                });
+            @endphp
+
+            @if($filteredPosts->isEmpty())
+                <p>Dear user, you do not have any blog posts yet. Click <a href="create-post">Add Post</a> to initiate your blog</p>
+            @else
+                @foreach($filteredPosts as $post)
+                    <div class="col-md-2 mb-4" style="flex: 0 0 auto;">
+                        <div class="card h-100">
+                            @if(!empty(trim($post->image)))
+                                <img style="width: auto; height: 100px;" src="{{ asset("uploads/". $post->image) }}" class="card-img-top" alt="Product Image">
+                            @endif
+                            <div class="card-body">
+                                <a class="card-title" href="/blog/{{ $post->id }}">{{ \Illuminate\Support\Str::limit($post->title ?? '', 20, ' ...') }}</a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+
+        </div>
       </div>
     </div>
   </section><!-- End About Us Section -->
 
-  <!-- Footer -->
-<footer class="footer mt-auto py-3 bg-light">
-  <div class="container text-center">
-      <span class="text-muted">Voltafrik &copy; 2023</span>
-  </div>
-</footer>
 
+<script>
+    // JavaScript for search functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchInput = document.getElementById('searchInput');
+        const postsContainer = document.getElementById('postsContainer');
 
-</body>
-</html>
+        searchInput.addEventListener('input', function () {
+            const searchText = this.value.toLowerCase().trim();
+            const posts = postsContainer.querySelectorAll('.card');
+
+            posts.forEach(post => {
+                const title = post.querySelector('.card-title').textContent.toLowerCase().trim();
+                if (title.includes(searchText)) {
+                    post.style.display = '';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+@endsection

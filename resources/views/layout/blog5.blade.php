@@ -22,7 +22,8 @@
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/style2.css') }}" rel="stylesheet">
   <script>
     window.watsonAssistantChatOptions = {
       integrationID: "3d583b9f-6ef4-4ef3-8c58-661d6410d126", // The ID of this integration.

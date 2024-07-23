@@ -2,7 +2,7 @@
 @section('content')
 
 
-<section id="hero" class="d-flex align-items-center" style="background-image: url(assets/img/bg04.jpg); background-size: cover; background-repeat: no-repeat">
+<section id="hero" class="hero-section d-flex align-items-center" style="background-image: url(assets/img/bg04.jpg); background-size: cover; background-repeat: no-repeat">
   <div class="container">
     <div class="row">
       <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
@@ -18,18 +18,21 @@
   </div>
 </section><!-- End Hero -->
 
-<!-- Dropdown Menu for Post Categories -->
-<section id="category-dropdown" class="py-3">
+<!-- Search and Category Dropdown -->
+<section id="search-and-category" class="py-3">
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-6 mb-3 mb-lg-0">
         <select id="category-select" class="form-control">
-          <option value="">All Categories</option>
-          <option value="fashion" selected>Fashion</option>
-          <option value="vehicles" selected>Vehicles</option>
-          <option value="solar_inverter" selected>Solar and Inverters</option>
-          <option value="smart_gadgets" selected>Smart Gadgets</option>
+          <option value="" selected>All Categories</option>
+          <option value="fashion">Fashion</option>
+          <option value="vehicles">Vehicles</option>
+          <option value="solar_inverter">Solar and Inverters</option>
+          <option value="smart_gadgets">Smart Gadgets</option>
         </select>
+      </div>
+      <div class="col-lg-6">
+        <input type="text" id="title-search-input" class="form-control" placeholder="Search by title">
       </div>
     </div>
   </div>
@@ -48,7 +51,7 @@
                 @endif
                 <div class="card-body">
                   <h5 class="card-title">{{ ucfirst($post->title) }}</h5>
-                  <p class="card-text">{{ ucfirst($post->body) }}</p>
+                  <p class="card-text">{!! ucfirst($post->body) !!}</p>
                   <p class="card-text">Price: {{ $post->price }}</p>
                   @foreach ($users as $user) 
                     @if ($user->name == $post->user_id)
@@ -64,5 +67,27 @@
     </div>
   </div>
 </section>
+
+<!-- JavaScript for Title Search -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const titleSearchInput = document.getElementById('title-search-input');
+    const posts = document.querySelectorAll('.post');
+
+    titleSearchInput.addEventListener('input', function() {
+      const searchText = titleSearchInput.value.trim().toLowerCase();
+
+      posts.forEach(post => {
+        const title = post.querySelector('.card-title').innerText.toLowerCase();
+
+        if (title.includes(searchText)) {
+          post.style.display = 'block';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 
 @endsection

@@ -22,7 +22,8 @@
   <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/style2.css') }}" rel="stylesheet">
   <script>
     window.watsonAssistantChatOptions = {
       integrationID: "3d583b9f-6ef4-4ef3-8c58-661d6410d126", // The ID of this integration.
@@ -69,34 +70,40 @@
             <h3>VoltAfrik</h3>
             <p>
               Yaba, Lagos<br>
-              Nigeira <br><br>
+              Nigeira <br>
               <strong>Phone:</strong> +2349034152070<br>
-              <strong>Phone:</strong> +2349046282789<br><br>
+              <strong>Phone:</strong> +2349046282789<br>
               <strong>Email:</strong> voltademy@gmail.com<br>
             </p>
           </div>
-          <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links1</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="/consultancy">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="/blog">Blog</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="terms">Terms and Conditions</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="privacy">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('home') }}">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('blog.index') }}">Blog</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('stores') }}">Stores</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('contact') }}">Contact</a></li>
             </ul>
           </div>
-  
-          <div class="col-lg-3 col-md-6 footer-links">
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links2</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('privacy') }}">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('terms') }}">T & C</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('portfolio') }}">Portfolio</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('consultancy') }}">Consultancy</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-6 footer-links">
             <h4>Our Services</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="smart_energy">Smart Energy</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="smart_house">Smart House</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="website">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="consultancy">Consultancy</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="data-analysis">Data Analysis</a></li>
-              <li><i class="dropdown bx bx-chevron-right"></i><a href="#">Stores</a></i>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('smart-house') }}">Smart Gadgets</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('smart-energy') }}">Smart Energy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('website') }}">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="{{ route('data-analysis') }}">Data Analysis</a></li>
             </ul>
           </div>
+        
           <div class="col-lg-3 col-md-6 footer-links text-center">
             <h4>Our Social Networks</h4>
             <p>Bellow are our social media handles</p>
@@ -105,6 +112,7 @@
               <a href="https://web.facebook.com/people/Voltafrik/61557974579735/" target="blank" class="facebook"><i class="bx bxl-facebook"></i></a>
               <a href="https://www.instagram.com/voltafrik/" target="blank" class="instagram"><i class="bx bxl-instagram"></i></a>
               <a href="https://www.linkedin.com/in/chukwuma-innocent-91aaaa284/" target="blank" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              <a href="https://www.youtube.com/@Voltafrik" target="_blank" class="youtube"><i class="bx bxl-youtube"></i></a>
             </div>
           </div>
 
@@ -114,7 +122,7 @@
 
     <div class="container footer-bottom clearfix">
       <div class="copyright">
-        &copy; Copyright 2023 @<strong><span>VoltAfrik</span></strong>. All Rights Reserved
+        &copy; Copyright 2023 @<strong><span>Voltafrik</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->

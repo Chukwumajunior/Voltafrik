@@ -11,6 +11,7 @@ use Intervention\Image\Facades\Image;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Post; // Import the Post model
+use Ramsey\Uuid\Type\Integer;
 
 class BlogPostController extends Controller
 {
@@ -27,14 +28,7 @@ class BlogPostController extends Controller
         // $posts2 = BlogPost::orderBy('created_at', 'desc')->take(4)->get();
 
         $authors = $posts->pluck('user_id')->unique();
-
-        // $authors = "";
-
-        // if($authors1 == $user_names) {
-        //     $authors = $user_names;
-
-        //     return $authors;
-        // }
+        
             
         $posts_sum = count($posts);
 
@@ -59,9 +53,11 @@ class BlogPostController extends Controller
     public function home()
     {
         $posts = BlogPost::all();
+        $advert_posts = BlogPost::where('type', 'Advert')->inRandomOrder()->take(4)->get();
         
         return view('index', [
             'posts' => $posts,
+            'advert_posts' => $advert_posts,
         ]); //returns the view with the post
     
     }
@@ -92,7 +88,9 @@ class BlogPostController extends Controller
         
             $imageName = time().'.'.$image->extension();
 
-            $image->move(public_path('uploads'), $imageName); 
+            // $image->move(public_path('uploads'), $imageName); 
+
+            $image->move('uploads', $imageName);
 
         } 
 
@@ -135,23 +133,38 @@ class BlogPostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function my_posts()
+    // public function my_posts()
+    // {
+    //     $posts = BlogPost::all(); //fetch all blog posts from ;
+
+    //     return view('blog.my_posts', [
+    //         'posts' => $posts,
+    //     ]); //returns the view with the post
+    // }
+
+
+    public function my_posts(blogPost $blogPost)
     {
-        $posts = BlogPost::all(); //fetch all blog posts from 
+        $user_id = $blogPost->user_id;
+        
+        $posts = BlogPost::where('user_id', $user_id)->get(); // Fetch posts that match the user_id
+        
         return view('blog.my_posts', [
-            'posts' => $posts,
-        ]); //returns the view with the post
+            'posts' => $posts
+        ]); // Return the view with the matching posts
     }
 
-    public function author(blogPost $blogPost)
+    public function user_posts()
     {
-        
-        $posts = BlogPost::all(); //fetch all blog posts from
-        
-        return view('blog.author', [
-            'posts' => $posts,
-            'blogPost' => $blogPost
-        ]); //returns the view with the post
+        // Get the authenticated user's ID
+        $user_id = Auth::user()->name;
+    
+        // Fetch all blog posts associated with the authenticated user's user_id
+        $posts = BlogPost::where('user_id', $user_id)->get();
+    
+        return view('blog.my_posts', [
+            'posts' => $posts
+        ]);
     }
 
 
@@ -177,7 +190,8 @@ class BlogPostController extends Controller
         
             $imageName = time().'.'.$image->extension();
 
-            $image->move(public_path('uploads'), $imageName);
+            // $image->move(public_path('uploads'), $imageName);
+            $image->move('uploads', $imageName);
 
             $blogPost->update(['image' => $imageName ]);
         }
@@ -192,6 +206,7 @@ class BlogPostController extends Controller
             'title' => $request->title,
             'body' => $request->body,
             'category' => $request->category,
+            'type' => $request->type,
             'price' => $price
         ]);
 
@@ -203,10 +218,11 @@ class BlogPostController extends Controller
      */
     public function destroy(BlogPost $blogPost)
     {
-         $blogPost->delete();
-
-        return redirect('/blog');
+        $blogPost->delete();
+    
+        return redirect('blog.index');
     }
+    
 
     public function market()
     {
@@ -242,8 +258,6 @@ class BlogPostController extends Controller
         ]); //returns the view with the post
 
     }
-
-
 
 }
 

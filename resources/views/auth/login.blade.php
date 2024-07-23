@@ -42,5 +42,9 @@
                 </a>
             @endif
         </div>
+     
+        <p>Don't have an account? <a href="register">Register</a></p>
+           
+        </div>
     </form>
 </x-guest-layout>

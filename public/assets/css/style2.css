@@ -1,0 +1,105 @@
+.post {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.post h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.post img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.post-meta, .author {
+    color: #777;
+    margin-bottom: 20px;
+}
+
+.post-content {
+    text-align: justify;
+    color: #555;
+}
+
+.btn-edit {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    color: #fff;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+    color: #fff;
+}
+
+.related-posts {
+    margin-top: 30px;
+}
+
+.related-posts h3 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+.related-post-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.related-post-card img {
+    max-width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+.related-post-card .card-body {
+    padding: 20px;
+}
+.card-img img{
+    width: 300px;
+}
+
+.related-post-card .card-title {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.footer {
+    background-color: #f8f9fa;
+    color: #777;
+    padding: 20px 0;
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+}
+
+@media (max-width: 576px) {
+    .post h1 {
+        font-size: 2em;
+    }
+
+    .related-post-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}

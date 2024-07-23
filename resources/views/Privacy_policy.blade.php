@@ -5,14 +5,13 @@
 <section id="hero" class="d-flex align-items-center bg-primary" style="height: 400px">
 
   <div class="container">
-    <div class="row">
-      <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-        <h1>Our Privacy Policy</h1>
+    <div style="text-align: center" data-aos="fade-up" data-aos-delay="200">
+      <h1>Our Privacy Policy</h1>
         <h2>Kindly read our Privacy Policies</h2>
       </div>
-      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+      {{-- <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
         <img width="300px" src="assets/img/security.png" class="img-fluid animated" alt="">
-      </div>
+      </div> --}}
     </div>
   </div>
 
@@ -59,6 +58,7 @@
     <h2>Contact Us</h2>
 
     <p>If you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us at <a href="mailto:voltademy@gmail.com">voltademy@gmail.com</a>.</p>
-</div>
+    <p>Also see our <a href="{{ route('terms') }}">Terms and Conditions</a></p>
+  </div>
     
 @endsection

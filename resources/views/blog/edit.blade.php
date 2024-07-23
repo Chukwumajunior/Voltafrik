@@ -50,40 +50,41 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="/blog">Voltablog</a>
+                <a class="navbar-brand" href="/">Voltafrik</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../../blog">Blog</a>
+                            <a class="nav-link" href="{{ route('blog.index') }}">Blog</a>
                         </li>
-                        @if (Auth::user())
+                        @if (Auth::check())
                             @if(Auth::user()->user_role == 'admin')
-                            <li class="nav-item">
-                                <a class="nav-link" href="../create/post">Create Post</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('createPost') }}">Create Post</a>
+                                </li>
                             @endif
                         @endif
                         <li class="nav-item">
-                            <a class="nav-link" href="../../portfolio">Portfolio</a>
+                            <a class="nav-link" href="{{ route('portfolio') }}">Portfolio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../../stores">Store</a>
+                            <a class="nav-link" href="{{ route('stores') }}">Store</a>
                         </li>
-                        @if(Auth::User())
+                        @if(Auth::check())
                             <li class="nav-item">
-                                <a class="nav-link" href="../../profile">Profile</a>
+                                <a class="nav-link" href="{{ route('profile.edit') }}">Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
+                                <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                             </li>
                         @endif
                     </ul>
+                    
                 </div>
             </div>
         </nav>
@@ -118,34 +119,34 @@
                             <div class="form-group">
                                 <label for="category-select">Category</label>
                                 <select id="category-select" class="form-control" name="category" required>
-                                    <option value="{{ $post->category }}" selected>{{ $post->category }}</option>
-                                    <option value="fashion">Fashion</option>
-                                    <option value="socials">Socials</option>
-                                    <option value="vehicles">Vehicles</option>
-                                    <option value="solar_inverter">Solar and Inverters</option>
-                                    <option value="tech_news">Tech News</option>
-                                    <option value="smart_gadgets">Smart Gadgets</option>
-                                    @if (Auth::User()->user_role == 'admin')    
-                                    <option value="web_project">Web Projects</option>
-                                        <option value="data_project">Data Projects</option>
-                                        <option value="smart_house_project">Smart House Projects</option>
-                                        <option value="advert">Advert</option>
+                                    <option style="color: red" value="{{ $post->category }}" selected>{{ $post->category }}</option>
+                                    <option value="Fashion">Fashion</option>
+                                    <option value="Socials">Socials</option>
+                                    <option value="Vehicles">Vehicles</option>
+                                    <option value="Solar inverter">Solar and Inverters</option>
+                                    <option value="Tech news">Tech News</option>
+                                    <option value="Smart gadgets">Smart Gadgets</option>
+                                    @if ((Auth::User()->user_role == 'admin') || (Auth::User()->user_role == 'writer'))      
+                                    <option value="Web project">Web Projects</option>
+                                        <option value="Data project">Data Projects</option>
+                                        <option value="Smart house project">Smart House Projects</option>
+                                        <option value="Advert">Advert</option>
                                     @endif
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="type-select">Type</label>
                                 <select id="type-select" class="form-control" name="type" required>
-                                    <option value="{{ $post->type }}" selected>{{ $post->type }}</option>
+                                    <option style="color: red" value="{{ $post->type }}" selected>{{ $post->type }}</option>
                                     <option value="Information">Information</option>
                                     <option value="Market">Market: displays on the store</option>
-                                    @if (Auth::User()->user_role == 'admin')    
+                                    @if ((Auth::User()->user_role == 'admin') || (Auth::User()->user_role == 'writer'))      
                                     <option value="Portfolio">Portfolio</option>
-                                        <option value="advert">Advertisement</option>
-                                        <option value="wall_main">Wall Main</option>
-                                        <option value="wall_image">Wall Image</option>
-                                        <option value="wall_video">Wall Video</option>
-                                        <option value="executives">Executives</option>
+                                        <option value="Wall video">Wall Video</option>
+                                        <option value="Wall Image1">Wall Image1</option>
+                                        <option value="Wall image2">Wall Image2</option>
+                                        <option value="Advert">Advert</option>
+                                        <option value="Executives">Executives</option>
                                     @endif
                                 </select>
                             </div>
@@ -173,6 +174,17 @@
     <!-- Quill Editor Script -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script>
+        document.getElementById("type-select").addEventListener("change", function() {
+            var selectedOption = this.value;
+            var priceInput = document.getElementById("price-input");
+    
+            if (selectedOption === "Market") {
+                priceInput.style.display = "block";
+            } else {
+                priceInput.style.display = "none";
+            }
+        });
+
         var quill = new Quill('#quill-editor', {
             theme: 'snow',
             placeholder: 'Enter Post Body',

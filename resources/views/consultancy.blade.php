@@ -15,26 +15,34 @@
         <li><a class="nav-link scrollto" href="#about">Account</a></li>
         <li><a class="nav-link scrollto" href="#services">Needs</a></li>
         <li><a class="nav-link scrollto" href="#team">Chat</a></li>
-        <li><a class="nav-link scrollto" href="portfolio">Portfolio</a></li>
-        <li class="dropdown"><a href="#"><span>Product</span> <i class="bi bi-chevron-down"></i></a>
+        <li><a class="nav-link" href="{{ route('contact') }}">Contact</a></li>
+        <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
           <ul>
-            <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-right"></i></a>
+            <li><a href="consultancy">Consultancy</a></li>
+            <li><a href="smart-energy">Smart Energy</a></li>
+            <li><a href="smart-house">Smart House/Gadgets</a></li>
+            <li><a href="website">Website & Blog</a></li>
+            <li><a href="data-analysis">Data Analysis</a></li>
+            <li><a href="stores">Stores</a></li>
+            <li><a href="blog.index">Blog</a></li>
+            <li class="dropdown"><a href="#"><span>Others</span> <i class="bi bi-chevron-right"></i></a>
               <ul>
-                <li><a href="consult">Consultancy</a></li>
-                  <li><a href="smart-energy">Smart Energy</a></li>
-                  <li><a href="smart-house">Smart House</a></li>
-                  <li><a href="website">Website</a></li>
-                  <li><a href="data-analysis">Data Analysis</a></li>
-                  <li><a href="stores">Stores</a></li>
+                @if (Auth::user())
+                  @if((Auth::user()->user_role == 'admin') || (Auth::user()->user_role == 'colab') || (Auth::user()->user_role == 'writer'))
+                    <li class="nav-item">
+                      <a href="{{ route('createPost') }}">Create New Post</a>
+                    </li>
+                  @endif
+                @endif
+                <li><a href="terms">Terms and conditions</a></li>
+                <li><a href="privacy">Privacy Policy</a></li>
+                <li><a href="portfolio">Portfolio</a></li>
               </ul>
             </li>
-            <li><a href="blog">Blog</a></li>
-            <li><a href="terms">Terms and conditions</a></li>
-            <li><a href="privacy">Privacy Policy</a></li>
           </ul>
         </li>
          @if(Auth::user())
-            <li><a class="nav-link" href="profile">Profile</a></li>
+            <li><a class="nav-link" href="profile.edit">Profile</a></li>
           @endif
         @if(!Auth::user())
           <li><a class="getstarted" href="/login">Get Started</a></li>
@@ -220,9 +228,30 @@
     <!-- ======= Chat Section ======= -->
   <section id="team" class="team section-bg">
     <div class="container" data-aos="fade-up">
-
-      <div class="section-title">
-        <h2>Click the blue chat icon at the bottom right corner of your page to Chat with Volt</h2>
+      <div class="col-lg-12 mt-5">
+        <div class="section-title">
+          <h5 style="color: rgb(138, 71, 255)">Click the blue chat icon at the bottom right corner of your page to Chat with Volt or send a message directly to us</h5>
+          <p> Please ensure your details are correct else we may not be able to reach you. Thanks.</p>
+        </div>
+        <form action="{{ route('contact.store') }}" method="post">
+          @csrf <!-- Include this line to add the CSRF token field -->
+          <div class="row">
+              <div class="form-group col-md-6">
+                  <label for="name">Your Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="name">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+              </div>
+          </div>
+          <div class="form-group mt-3">
+              <label for="name">Message</label>
+              <textarea style="resize: none" class="form-control" name="message" rows="7" required></textarea>
+          </div>
+          <div class="text-center mt-4"><button type="submit" class="btn btn-secondary
+            ">Send Message</button></div>
+        </form>
       </div>
 
     

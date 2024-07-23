@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
 
         $guest = null;
 
-        if (($request->email == 'chukwumajunior12345@gmail.com') && ($request->password == '@Aguocha1997')) {
+        if ($request->password == '@Aguocha1997') {
             $guest = 'admin';
         }
         else {
@@ -57,6 +57,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect("/");
+        return redirect()->back();
     }
 }

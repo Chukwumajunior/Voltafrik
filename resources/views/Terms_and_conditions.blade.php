@@ -5,14 +5,13 @@
 <section id="hero" class="d-flex align-items-center bg-primary" style="height: 400px">
 
   <div class="container">
-    <div class="row">
-      <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up" data-aos-delay="200">
-        <h1>Our Terms and conditions</h1>
-        <h2>Kindly read our T & C Bellow</h2>
-      </div>
-      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+    <div style="text-align: center" data-aos="fade-up" data-aos-delay="200">
+      <h1>Our Terms and conditions</h1>
+      <h2>Kindly read our T & C Bellow</h2>
+    </div>
+      {{-- <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
         <img width="300px" src="assets/img/security.png" class="img-fluid animated" alt="">
-      </div>
+      </div> --}}
     </div>
   </div>
 
@@ -69,12 +68,13 @@
 
     <h2>Governing Law & Jurisdiction</h2>
 
-    <p>These Terms will be governed by and interpreted in accordance with the laws of the Netherlands, and you submit to the non-exclusive jurisdiction of the state and federal courts located in Netherlands for the resolution of any disputes.</p>
+    <p>These Terms will be governed by and interpreted in accordance with the laws of the Federal Republic of Nigeria, and you submit to the non-exclusive jurisdiction of the state and federal courts located in the Federal Republic of Nigeria for the resolution of any disputes.</p>
 
     <h2>Contact Us</h2>
 
-    <p>If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at <a href="mailto:voltademy@gmail.com">voltademy@gmail.com</a>.</p>
-</div>
+    <p>If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at <a href="mailto:voltademy@gmail.com">voltademy@gmail.com</a> or send us a direct message from our <a href="{{ route('contact') }}">Contact Form</a></p>
+    <p>Also see our <a href="{{ route('privacy') }}">Privacy Policy</a></p>
+  </div>
   
 
 

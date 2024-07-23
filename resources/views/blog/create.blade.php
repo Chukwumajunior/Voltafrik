@@ -12,33 +12,34 @@
     <!-- Header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/blog">Voltablog</a>
+            <a class="navbar-brand" href="/">Voltafrik</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../blog">Blog</a>
+                        <a class="nav-link" href="{{ route('blog.index') }}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../portfolio">Portfolio</a>
+                        <a class="nav-link" href="{{ route('portfolio') }}">Portfolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../../stores">Store</a>
+                        <a class="nav-link" href="{{ route('stores') }}">Store</a>
                     </li>
-                    @if(Auth::User())
+                    @if(Auth::check())
                         <li class="nav-item">
-                            <a class="nav-link" href="../../profile">Profile</a>
+                            <a class="nav-link" href="{{ route('profile.edit') }}">Profile</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/logout') }}">Logout</a>
+                            <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                         </li>
                     @endif
                 </ul>
+                
             </div>
         </nav>
     </header>
@@ -70,17 +71,17 @@
                             <div class="form-group">
                                 <label for="category-select">Category</label>
                                 <select id="category-select" class="form-control" name="category" :value="old('category')" required>
-                                    <option value="fashion">Fashion</option>
-                                    <option value="socials">Socials</option>
-                                    <option value="vehicles">Vehicles</option>
-                                    <option value="solar_inverter">Solar and Inverters</option>
-                                    <option value="tech_news">Tech News</option>
-                                    <option value="smart_gadgets" selected>Smart Gadgets</option>
-                                    @if (Auth::User()->user_role == 'admin')    
-                                        <option value="web_project" selected>Web Projects</option>
-                                        <option value="data_project">Data Projects</option>
-                                        <option value="smart_house_project">Smart House Projects</option>
-                                        <option value="advert">Advert</option>
+                                    <option value="Fashion">Fashion</option>
+                                    <option value="Socials">Socials</option>
+                                    <option value="Vehicles">Vehicles</option>
+                                    <option value="Solar inverter">Solar and Inverters</option>
+                                    <option value="Tech news">Tech News</option>
+                                    <option value="Smart gadgets" selected>Smart Gadgets</option>
+                                    @if ((Auth::User()->user_role == 'admin') || (Auth::User()->user_role == 'writer'))  
+                                        <option value="Web project" selected>Web Projects</option>
+                                        <option value="Data project">Data Projects</option>
+                                        <option value="Smart house project">Smart House Projects</option>
+                                        <option value="Advert">Advert</option>
                                     @endif
                                 </select>
                             </div>
@@ -89,13 +90,13 @@
                                 <select id="type-select" class="form-control" name="type" :value="old('type')" required>
                                     <option value="Information" selected>Information</option>
                                     <option value="Market">Market: displays on the store</option>
-                                    @if (Auth::User()->user_role == 'admin')    
+                                    @if ((Auth::User()->user_role == 'admin') || (Auth::User()->user_role == 'writer'))    
                                         <option value="Portfolio">Portfolio</option>
-                                        <option value="advert">Advertisement</option>
-                                        <option value="wall_main">Wall Main</option>
-                                        <option value="wall_image">Wall Image</option>
-                                        <option value="wall_video">Wall Video</option>
-                                        <option value="executives">Executives</option>
+                                        <option value="Wall video">Wall Video</option>
+                                        <option value="Wall Image1">Wall Image1</option>
+                                        <option value="Wall image2">Wall Image2</option>
+                                        <option value="Advert">Advert</option>
+                                        <option value="Executives">Executives</option>
                                     @endif
                                 </select>
                             </div>
