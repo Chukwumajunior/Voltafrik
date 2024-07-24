@@ -445,36 +445,26 @@
       <div class="section-title">
         <h2>Send us a Message</h2>
       </div>
-
-        <div class="mt-3 mt-lg-0 d-flex align-items-stretch">
-          <form action="{{ route('contact.store') }}" method="post" role="form" class="php-email-form">
-            @csrf <!-- Include this line to add the CSRF token field -->
-            <div class="row">
-                <div class="form-group col-sm-6">
-                    <label for="name">Your Name</label>
-                    <input type="text" name="name" class="form-control" id="name" required>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label for="name">Your Email</label>
-                    <input type="email" class="form-control" name="email" id="email" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="name">Subject</label>
-                <input type="text" class="form-control" name="subject" id="subject" required>
-            </div>
-            <div class="form-group">
-                <label for="name">Message</label>
-                <textarea class="form-control" name="message" rows="5" required></textarea>
-            </div>
-            <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-            </div>
-            <div class="text-center"><button type="submit">Send Message</button></div>
-          </form>
-        </div>
+      <p style="text-align: center"> Please ensure your details are correct else we may not be able to reach you. Thanks.</p>
+        <form action="{{ route('contact.store') }}" method="post">
+          @csrf <!-- Include this line to add the CSRF token field -->
+          <div class="row">
+              <div class="form-group col-md-6">
+                  <label for="name">Your Name</label>
+                  <input type="text" name="name" class="form-control" id="name" required>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="name">Your Email</label>
+                  <input type="email" class="form-control" name="email" id="email" required>
+              </div>
+          </div>
+          <div class="form-group mt-3">
+              <label for="name">Message</label>
+              <textarea style="resize: none" class="form-control" name="message" rows="7" required></textarea>
+          </div>
+          <div class="text-center mt-4"><button type="submit" class="btn btn-secondary
+            ">Send Message</button></div>
+        </form>
       </div>
 
     </div>
